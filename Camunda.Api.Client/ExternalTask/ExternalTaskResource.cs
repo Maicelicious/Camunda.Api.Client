@@ -49,6 +49,11 @@ namespace Camunda.Api.Client.ExternalTask
         /// Unlock an external task. Clears the task’s lock expiration time and worker id.
         /// </summary>
         public Task Unlock() => _api.Unlock(_externalTaskId);
+        
+        /// <summary>
+        /// Lock an external task by a given id for a specified worker and amount of time. Note: Attempting to lock an already locked external task with the same worker will succeed and a new lock duration will be set, starting from the current moment.
+        /// </summary>
+        public Task Lock(ExternalTaskLock externalTaskLock) => _api.Lock(_externalTaskId, externalTaskLock);
 
         /// <summary>
         /// Extends the timeout of the lock by a given amount of time.
